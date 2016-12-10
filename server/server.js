@@ -9,6 +9,8 @@ import mongoose from './db/mongoose';
 import Todo from './models/Todo';
 import User from './models/User';
 
+import authenticate from './middleware/authenticate';
+
 const app = express();
 const port = process.env.PORT;
 
@@ -103,6 +105,10 @@ app.post('/users', (req, res) => {
     }).catch((err) => {
         res.status(400).send(err);
     });
+});
+
+app.get('/users/me', authenticate, (req, res) => {
+    res.send(req.user);
 });
 
 app.listen(port, () => {
