@@ -1,15 +1,16 @@
+import './config';
+
 import _ from 'lodash';
 import express from 'express';
 import bodyParser from 'body-parser';
 import { ObjectID } from 'mongodb';
 
 import mongoose from './db/mongoose';
-
 import Todo from './models/Todo';
 import User from './models/User';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 

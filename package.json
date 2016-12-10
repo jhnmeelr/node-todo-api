@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node server/server.js",
-    "watch": "nodemon --exec babel-node server/server.js",
-    "test": "mocha --require babel-register server/**/*.test.js",
+    "server": "babel-node server/server.js",
+    "server-watch": "nodemon --exec babel-node server/server.js",
+    "test": "export NODE_ENV=test || SET \"NODE_ENV=test\" && mocha --require babel-register server/**/*.test.js",
     "test-watch": "nodemon --exec npm test"
   },
   "engines": {
