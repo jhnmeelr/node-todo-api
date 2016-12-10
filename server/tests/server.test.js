@@ -4,8 +4,9 @@ import { ObjectID } from 'mongodb';
 
 import app from '../server';
 import Todo from '../models/Todo';
+import User from '../models/User';
 
-const todos = [
+let todos = [
     {
         _id: new ObjectID(),
         text: 'First test todo'
@@ -18,9 +19,23 @@ const todos = [
     }
 ];
 
+let users = [
+    {
+        _id: new ObjectID(),
+        email: 'some@gmail.com',
+        password: '123456'
+    }
+];
+
 beforeEach((done) => {
     Todo.remove({}).then(() => {
         return Todo.insertMany(todos);
+    }).then(() => done());
+});
+
+beforeEach((done) => {
+    User.remove({}).then(() => {
+        return User.insertMany(users);
     }).then(() => done());
 });
 
@@ -178,3 +193,20 @@ describe('PATCH /todos/:id', () => {
             .end(done);
     });
 })
+
+describe('POST /users', () => {
+    it('should create a new user', (done) => {
+        const email = 'some@gmail.com';
+        const password = '123456';
+
+        request(app)
+            .post('/users')
+            .send({ email, password })
+            .expect(200)
+            .expect((res) => {
+                expect(res.body.email).toBe(email);
+                expect(res.body.password).toBe(password);
+            })
+            .end(done);
+    });
+});
