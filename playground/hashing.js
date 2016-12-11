@@ -1,15 +1,31 @@
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcryptjs';
 
-let data = {
-    id: 10
-};
+const password = '123456';
 
-let token = jwt.sign(data, 'secretsalt');
-console.log(token);
+// bcrypt.genSalt(10, (err, salt) => {
+//     bcrypt.hash(password, salt, (err, hash) => {
+//         console.log(hash);
+//     });
+// });
 
-let decoded = jwt.verify(token, 'secretsalt');
-console.log(decoded);
+const hashedPassword = '$2a$10$VhAgs1xi.xmAAQBw7th2q.di1d3X1SdOdUG2d3Fi8CHJFDYMLkbXe';
 
+bcrypt.compare(password, hashedPassword, (err, res) => {
+    console.log(res);
+});
+
+
+
+// let data = {
+//     id: 10
+// };
+
+// let token = jwt.sign(data, 'secretsalt');
+// console.log(token);
+
+// let decoded = jwt.verify(token, 'secretsalt');
+// console.log(decoded);
 
 
 

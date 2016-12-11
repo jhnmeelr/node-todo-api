@@ -33,13 +33,13 @@ beforeEach((done) => {
     }).then(() => done());
 });
 
-beforeEach((done) => {
-    User.remove({}).then(() => {
-        return User.insertMany(users);
-    }).then(() => done());
-});
+// beforeEach((done) => {
+//     User.remove({}).then(() => {
+//         return User.insertMany(users);
+//     }).then(() => done());
+// });
 
-describe('GET /todos', () => {
+describe('POST /todos', () => {
     it('should create a new todo', (done) => {
         const text = 'Test todo text';
 
@@ -194,19 +194,19 @@ describe('PATCH /todos/:id', () => {
     });
 })
 
-describe('POST /users', () => {
-    it('should create a new user', (done) => {
-        const email = 'some@gmail.com';
-        const password = '123456';
+// describe('POST /users', () => {
+//     it('should create a new user', (done) => {
+//         const email = 'some@gmail.com';
+//         const password = '123456';
 
-        request(app)
-            .post('/users')
-            .send({ email, password })
-            .expect(200)
-            .expect((res) => {
-                expect(res.body.email).toBe(email);
-                expect(res.body.password).toBe(password);
-            })
-            .end(done);
-    });
-});
+//         request(app)
+//             .post('/users')
+//             .send({ email, password })
+//             .expect(200)
+//             .expect((res) => {
+//                 expect(res.body.email).toBe(email);
+//                 expect(res.body.password).toBe(password);
+//             })
+//             .end(done);
+//     });
+// });
