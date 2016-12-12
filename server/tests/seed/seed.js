@@ -30,7 +30,7 @@ export const users = [
         tokens: [
             {
                 access: 'auth',
-                token: jwt.sign({ _id: userOneId, access: 'auth' }, 'secretsalt').toString()
+                token: jwt.sign({ _id: userOneId, access: 'auth' }, process.env.JWT_SECRET).toString()
             }
         ]
     },
@@ -41,7 +41,7 @@ export const users = [
         tokens: [
             {
                 access: 'auth',
-                token: jwt.sign({ _id: userTwoId, access: 'auth' }, 'secretsalt').toString()
+                token: jwt.sign({ _id: userTwoId, access: 'auth' }, process.env.JWT_SECRET).toString()
             }
         ]
     }
