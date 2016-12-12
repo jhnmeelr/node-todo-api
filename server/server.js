@@ -107,6 +107,10 @@ app.post('/users', (req, res) => {
     });
 });
 
+app.get('/users/me', authenticate, (req, res) => {
+    res.send(req.user);
+});
+
 app.post('/users/login', (req, res) => {
     let body = _.pick(req.body, ['email', 'password']);
 
@@ -119,8 +123,12 @@ app.post('/users/login', (req, res) => {
     });
 });
 
-app.get('/users/me', authenticate, (req, res) => {
-    res.send(req.user);
+app.delete('/users/me/token', authenticate, (req, res) => {
+    req.user.removeToken(req.token).then(() => {
+        res.status(200).send();
+    }, () => {
+        res.status(400).send();
+    });
 });
 
 app.listen(port, () => {
