@@ -4,21 +4,24 @@ import jwt from 'jsonwebtoken';
 import Todo from '../../models/Todo';
 import User from '../../models/User';
 
+const userOneId = new ObjectID();
+const userTwoId = new ObjectID();
+
 export const todos = [
     {
         _id: new ObjectID(),
-        text: 'First test todo'
+        text: 'First test todo',
+        _creator: userOneId
     },
     {
         _id: new ObjectID(),
         text: 'Second test todo',
         completed: true,
-        completedAt: 333
+        completedAt: 333,
+        _creator: userTwoId
     }
 ];
 
-const userOneId = new ObjectID();
-const userTwoId = new ObjectID();
 export const users = [
     {
         _id: userOneId,
@@ -34,7 +37,13 @@ export const users = [
     {
         _id: userTwoId,
         email: 'usertwo@gmail.com',
-        password: 'userTwoPass'
+        password: 'userTwoPass',
+        tokens: [
+            {
+                access: 'auth',
+                token: jwt.sign({ _id: userTwoId, access: 'auth' }, 'secretsalt').toString()
+            }
+        ]
     }
 ];
 
